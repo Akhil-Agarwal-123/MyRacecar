@@ -50,14 +50,12 @@ def update():
     # TODO: Follow the wall to the right of the car without hitting anything.
     scan = rc.lidar.get_samples()
     scan = (scan - 0.01) % 99999999
-    _, right_dis = rc_utils.get_lidar_closest_point(scan, (80, 100))
-    _, left_dis = rc_utils.get_lidar_closest_point(scan, (260, 280))
+    _, right_dis = rc_utils.get_lidar_closest_point(scan, (35, 45))
+    _, left_dis = rc_utils.get_lidar_closest_point(scan, (315, 325))
 
-    speed = 0.6
-    kpa = 0.05
+    speed = 1
+    kpa = 0.02
     angle = min(1, max(-1, kpa * (right_dis - left_dis)))
-
-    print(angle)
 
     rc.drive.set_speed_angle(speed, angle)
 
